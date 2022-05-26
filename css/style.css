@@ -1,0 +1,202 @@
+/* Global Rules Start */
+:root {
+	--main-board-color: #0100fc;
+	--main-border-color: #00007c;
+	--red-player: #ff0001;
+	--yellow-player: #fffe01;
+	--main-section-padding: 60px;
+}
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	font-family: "Cairo", sans-serif;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	text-decoration: none;
+}
+
+.container {
+	padding-left: 15px;
+	padding-right: 15px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* Small Screen */
+@media (min-width: 768px) {
+	.container {
+		width: 750px;
+	}
+}
+
+/* Medium Screen */
+@media (min-width: 992px) {
+	.container {
+		width: 970px;
+	}
+}
+
+/* Large Screen */
+@media (min-width: 1200px) {
+	.container {
+		width: 1170px;
+	}
+}
+
+/* Global Rules End */
+/* Game Board Start */
+
+main .game {
+	padding-top: var(--main-section-padding);
+	padding-bottom: var(--main-section-padding);
+	position: relative;
+	height: 100vh;
+}
+
+main .game .placeholder {
+	height: 35px;
+}
+
+main .game .container .player-turn {
+	width: fit-content;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: 20px;
+}
+
+main .game .container .player-turn .current-player {
+	padding: 5px;
+	display: inline-block;
+	width: 130px;
+	text-align: center;
+}
+
+main .game .container .player-turn .current-player.red {
+	color: white;
+	background-color: var(--red-player);
+}
+
+main .game .container .player-turn .current-player.yellow {
+	color: black;
+	background-color: var(--yellow-player);
+}
+
+main .game .container .game-board {
+	margin-left: auto;
+	margin-right: auto;
+	width: 640px;
+	height: 550px;
+	background-color: var(--main-board-color);
+	border: 5px solid var(--main-border-color);
+	display: grid;
+	grid-template-columns: repeat(7, 90px);
+	grid-template-rows: repeat(6, 90px);
+	align-items: center;
+	margin-bottom: 20px;
+	margin-top: 20px;
+}
+
+main .game .container .game-board .tile {
+	justify-self: center;
+	width: 80px;
+	height: 80px;
+	background-color: white;
+	border: 5px solid var(--main-border-color);
+	border-radius: 50%;
+	cursor: pointer;
+}
+
+main .game .container .game-board .tile .coord {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+}
+
+main .game .container .game-board .tile .coord.red {
+	background-color: var(--red-player);
+}
+
+main .game .container .game-board .tile .coord.yellow {
+	background-color: var(--yellow-player);
+}
+
+main .game .container .buttons {
+	width: 100%;
+	display: flex;
+	justify-content: center;
+}
+
+main .game .container button {
+	background-color: var(--main-border-color);
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 20px;
+	width: fit-content;
+	cursor: pointer;
+	position: relative;
+	border: none;
+	margin-left: 20px;
+}
+
+main .game .container .restart-game-button {
+	background-color: var(--red-player);
+}
+
+main .game .container .winner {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 1;
+}
+
+main .game .container .winner .overlay {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background-color: #333;
+	opacity: 50%;
+	cursor: pointer;
+}
+
+main .game .container .winner .content {
+	position: relative;
+	padding: 50px;
+	background-color: black;
+	border-radius: 20px;
+}
+
+main .game .container .winner .content .cross-mark {
+	position: absolute;
+	top: 0;
+	right: 0;
+	cursor: pointer;
+}
+
+main .game .container .winner .text {
+	color: white;
+}
+
+/* Game Board End */

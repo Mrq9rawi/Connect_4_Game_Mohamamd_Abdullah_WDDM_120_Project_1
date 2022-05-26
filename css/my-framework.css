@@ -1,0 +1,111 @@
+.center-flex {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.circle-100 {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}
+
+.circle-150 {
+	width: 150px;
+	height: 150px;
+	border-radius: 50%;
+}
+
+.circle-200 {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+/* Check Mark Creation ✅ */
+
+.check-mark {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #009688;
+	position: relative;
+}
+
+.check-mark::before {
+	content: "";
+	width: 29%;
+	height: 12.5%;
+	background-color: white;
+	position: absolute;
+	top: 50%;
+	left: 22.5%;
+	transform: rotate(40deg);
+}
+
+.check-mark::after {
+	content: "";
+	width: 47%;
+	height: 12.5%;
+	background-color: white;
+	position: absolute;
+	top: 41%;
+	left: 32%;
+	transform: rotate(130deg);
+}
+
+/* Cross Mark Creation ❎ */
+
+.cross-mark {
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	background-color: #e91e63;
+	position: relative;
+}
+
+.cross-mark::before {
+	content: "";
+	width: 50%;
+	height: 7%;
+	background-color: white;
+	position: absolute;
+	top: 46%;
+	left: 25%;
+	transform: rotate(48deg)
+}
+
+.cross-mark::after {
+	content: "";
+	width: 50%;
+	height: 7%;
+	position: absolute;
+	top: 46%;
+	left: 25%;
+	background-color: white;
+	transform: rotate(-48deg)
+}
+
+/* Question Mark Creation ❔ */
+
+.question-mark {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background-color: #7e7e7e;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.question-mark::before {
+	content: "?";
+	color: white;
+	font-size: 20px
+}
+
+.gird-cards-300 {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+}
