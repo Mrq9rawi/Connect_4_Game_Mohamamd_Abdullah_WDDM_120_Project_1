@@ -120,7 +120,8 @@ function addCoord() {
 		}
 		// If All Tiles Used End Game As Tie
 		if (tilesUsed == 42) {
-			gameOver("tie");
+			// gameOver("tie");
+			console.log("hi");
 		}
 	});
 	// Play Audio At The End
@@ -299,5 +300,6 @@ function gameOver(state) {
 	// Clear Both Players Arrays
 	redPlayerCoords = [];
 	yellowPlayerCoords = [];
+	tilesUsed = 0;
 };
 
