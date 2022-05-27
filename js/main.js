@@ -14,7 +14,6 @@ let rows = 6;
 let redPlayerCoords = [];
 let yellowPlayerCoords = [];
 let currentPlayer = redPlayer;
-let tilesUsed = 0;
 
 // Start Game Button And Reset Game
 startButton.addEventListener("click", createGame);
@@ -114,14 +113,14 @@ function addCoord() {
 		});
 	}
 	// Check How Many Tiles Have Been Used
+	let tilesUsed = 0;
 	parentNodes.forEach((tile) => {
 		if (tile.classList.contains("used")) {
 			tilesUsed++;
 		}
 		// If All Tiles Used End Game As Tie
 		if (tilesUsed == 42) {
-			// gameOver("tie");
-			console.log("hi");
+			gameOver("tie");
 		}
 	});
 	// Play Audio At The End
@@ -300,6 +299,5 @@ function gameOver(state) {
 	// Clear Both Players Arrays
 	redPlayerCoords = [];
 	yellowPlayerCoords = [];
-	tilesUsed = 0;
 };
 
