@@ -23,7 +23,7 @@ function addChoosePlayer() {
 	let choosePlayerH1 = document.createElement("h1");
 	let choosePlayerRed = document.createElement("div");
 	let choosePlayerYellow = document.createElement("div");
-// Add Classes And Text
+	// Add Classes And Text
 	choosePlayerDiv.classList.add("choose-player");
 	choosePlayerRed.classList.add("coord");
 	choosePlayerRed.classList.add("red");
@@ -44,7 +44,7 @@ function addChoosePlayer() {
 	});
 	choosePlayerH1.textContent = "Choose The First Player";
 
-// Add Elements
+	// Add Elements
 	gameBoard.append(choosePlayerDiv);
 	choosePlayerDiv.append(choosePlayerH1);
 	choosePlayerDiv.append(choosePlayerRed);
@@ -294,8 +294,14 @@ function gameOver(state) {
 	let winnerTextP = document.createElement("p");
 	let replayButton = document.createElement("button");
 	// Add Events To Elements
-	overlayDiv.addEventListener("click", removeWinnerDiv);
-	crossMarkDiv.addEventListener("click", removeWinnerDiv);
+	overlayDiv.addEventListener("click", () => {
+		removeWinnerDiv();
+		addChoosePlayer();
+	});
+	crossMarkDiv.addEventListener("click", () => {
+		removeWinnerDiv();
+		addChoosePlayer();
+	});
 	// Add Classes To The Elements
 	winnerDiv.classList.add("winner");
 	overlayDiv.classList.add("overlay");
