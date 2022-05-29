@@ -14,6 +14,45 @@ let rows = 6;
 let redPlayerCoords = [];
 let yellowPlayerCoords = [];
 let currentPlayer = redPlayer;
+let firstToPlay;
+
+// Add Choose Player Option
+function addChoosePlayer() {
+	// Create Elements
+	let choosePlayerDiv = document.createElement("div");
+	let choosePlayerH1 = document.createElement("h1");
+	let choosePlayerRed = document.createElement("div");
+	let choosePlayerYellow = document.createElement("div");
+// Add Classes And Text
+	choosePlayerDiv.classList.add("choose-player");
+	choosePlayerRed.classList.add("coord");
+	choosePlayerRed.classList.add("red");
+	choosePlayerYellow.classList.add("coord");
+	choosePlayerYellow.classList.add("yellow");
+	// Add Functionality To The Buttons
+	choosePlayerRed.addEventListener("click", () => {
+		currentPlayer = redPlayer;
+		firstToPlay = redPlayer;
+		choosePlayerYellow.classList.remove("chosen");
+		choosePlayerRed.classList.add("chosen");
+	});
+	choosePlayerYellow.addEventListener("click", () => {
+		currentPlayer = yellowPlayer;
+		firstToPlay = yellowPlayer;
+		choosePlayerRed.classList.remove("chosen");
+		choosePlayerYellow.classList.add("chosen");
+	});
+	choosePlayerH1.textContent = "Choose The First Player";
+
+// Add Elements
+	gameBoard.append(choosePlayerDiv);
+	choosePlayerDiv.append(choosePlayerH1);
+	choosePlayerDiv.append(choosePlayerRed);
+	choosePlayerDiv.append(choosePlayerYellow);
+}
+
+// Call The Function
+addChoosePlayer();
 
 // Start Game Button And Reset Game
 startButton.addEventListener("click", createGame);
@@ -28,6 +67,11 @@ restartButton.addEventListener("click", () => {
 function createGame() {
 	// Check To Make Sure Game Hasn't Started Yet
 	if (!gameBoard.classList.contains("started")) {
+		// Check If There Is The Option To Choose A Player
+		const choosePlayerDiv = document.querySelector("main .game  .container .game-board .choose-player");
+		if (choosePlayerDiv) {
+			choosePlayerDiv.remove();
+		}
 		// Remove Placeholder Div (Design Issue)
 		placeholder.style.display = "none";
 		// Make The Start Game Button Not Allowed On Hover
@@ -248,6 +292,7 @@ function gameOver(state) {
 	let contentDiv = document.createElement("div");
 	let crossMarkDiv = document.createElement("div");
 	let winnerTextP = document.createElement("p");
+	let replayButton = document.createElement("button");
 	// Add Events To Elements
 	overlayDiv.addEventListener("click", removeWinnerDiv);
 	crossMarkDiv.addEventListener("click", removeWinnerDiv);
@@ -267,6 +312,12 @@ function gameOver(state) {
 	} else if (state == "tie") {
 		winnerTextP.textContent = "It Is A Draw";
 	};
+	replayButton.textContent = "Replay?";
+	// Add Functionality To Replay Button
+	replayButton.addEventListener("click", () => {
+		removeWinnerDiv();
+		createGame();
+	});
 	// Add All Elements To The Document If The State Is Not Restart
 	if (state !== "restart") {
 		gameContainer.append(winnerDiv);
@@ -274,6 +325,7 @@ function gameOver(state) {
 		winnerDiv.append(contentDiv);
 		contentDiv.append(crossMarkDiv);
 		contentDiv.append(winnerTextP);
+		contentDiv.append(replayButton);
 	}
 	// Remove The Winner Indicator
 	function removeWinnerDiv() {
@@ -295,7 +347,7 @@ function gameOver(state) {
 	// Remove Current Player Indicator
 	document.querySelector("main .game .container .player-turn").remove();
 	// Reset Player Turn
-	currentPlayer = redPlayer;
+	currentPlayer = firstToPlay;
 	// Clear Both Players Arrays
 	redPlayerCoords = [];
 	yellowPlayerCoords = [];

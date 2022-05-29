@@ -4,31 +4,12 @@
 	--main-border-color: #00007c;
 	--red-player: #ff0001;
 	--yellow-player: #fffe01;
-	--main-section-padding: 60px;
 }
 
 * {
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-}
-
-body {
-	font-family: "Cairo", sans-serif;
-}
-
-html {
-	scroll-behavior: smooth;
-}
-
-ul {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-a {
-	text-decoration: none;
 }
 
 .container {
@@ -38,43 +19,21 @@ a {
 	margin-right: auto;
 }
 
-/* Small Screen */
-@media (min-width: 768px) {
-	.container {
-		width: 750px;
-	}
-}
-
-/* Medium Screen */
-@media (min-width: 992px) {
-	.container {
-		width: 970px;
-	}
-}
-
-/* Large Screen */
-@media (min-width: 1200px) {
-	.container {
-		width: 1170px;
-	}
-}
-
 /* Global Rules End */
 /* Game Board Start */
 
 main .game {
-	padding-top: var(--main-section-padding);
-	padding-bottom: var(--main-section-padding);
 	position: relative;
-	height: 100vh;
 }
 
 main .game .placeholder {
 	height: 33.2px;
+	margin-top: 20px;
 }
 
 main .game .container .player-turn {
 	width: fit-content;
+	margin-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
 	font-size: 20px;
@@ -101,7 +60,6 @@ main .game .container .game-board {
 	margin-left: auto;
 	margin-right: auto;
 	width: 640px;
-	max-width: 100%;
 	height: 550px;
 	background-color: var(--main-board-color);
 	border: 5px solid var(--main-border-color);
@@ -111,6 +69,43 @@ main .game .container .game-board {
 	align-items: center;
 	margin-bottom: 20px;
 	margin-top: 20px;
+	position: relative;
+}
+
+main .game .container .game-board .choose-player {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 500px;
+	text-align: center;
+}
+
+main .game .container .game-board .choose-player h1 {
+	color: white;
+	font-size: 40px;
+}
+
+main .game .container .game-board .choose-player .coord {
+	width: 80px;
+	height: 80px;
+	border-radius: 50%;
+	cursor: pointer;
+	display: inline-block;
+	margin-right: 20px;
+	margin-top: 20px;
+}
+
+main .game .container .game-board .choose-player .coord.red {
+	background-color: var(--red-player);
+}
+
+main .game .container .game-board .choose-player .coord.yellow {
+	background-color: var(--yellow-player);
+}
+
+main .game .container .game-board .choose-player .coord.chosen {
+	border: 5px solid white;
 }
 
 main .game .container .game-board .tile {
@@ -143,7 +138,7 @@ main .game .container .buttons {
 	justify-content: center;
 }
 
-main .game .container button {
+main .game .container .buttons button {
 	background-color: var(--main-border-color);
 	color: white;
 	padding: 10px 20px;
@@ -156,7 +151,7 @@ main .game .container button {
 	margin-left: 20px;
 }
 
-main .game .container .restart-game-button {
+main .game .container .buttons .restart-game-button {
 	background-color: var(--red-player);
 }
 
@@ -176,7 +171,7 @@ main .game .container .winner {
 main .game .container .winner .overlay {
 	position: absolute;
 	width: 100%;
-	height: 100%;
+	height: 105vh;
 	background-color: #333;
 	opacity: 50%;
 	cursor: pointer;
@@ -187,6 +182,7 @@ main .game .container .winner .content {
 	padding: 50px;
 	background-color: black;
 	border-radius: 20px;
+	text-align: center;
 }
 
 main .game .container .winner .content .cross-mark {
@@ -198,6 +194,20 @@ main .game .container .winner .content .cross-mark {
 
 main .game .container .winner .text {
 	color: white;
+	font-size: 20px;
+}
+
+main .game .container .winner .content button {
+	background-color: #fee440;
+	color: white;
+	padding: 10px 20px;
+	border-radius: 5px;
+	font-size: 15px;
+	width: fit-content;
+	cursor: pointer;
+	border: none;
+	color: black;
+	margin-top: 20px;
 }
 
 /* Game Board End */
