@@ -1,10 +1,10 @@
 // Get All Important Elements
 const gameBoard = document.getElementById("game-board");
 const audio = document.getElementById("sound-effect");
-const startButton = document.querySelector("main .game .container .start-game-button");
-const restartButton = document.querySelector("main .game .container .restart-game-button");
-const gameContainer = document.querySelector("main .game .container");
-const placeholder = document.querySelector("main .game .container .placeholder");
+const startButton = document.getElementById("start-game-button");
+const restartButton = document.getElementById("restart-game-button");
+const gameContainer = document.getElementById("container");
+const placeholder = document.getElementById("placeholder");
 
 // Declare Important Variables
 let redPlayer = "red";
@@ -25,6 +25,7 @@ function addChoosePlayer() {
 	let choosePlayerYellow = document.createElement("div");
 	// Add Classes And Text
 	choosePlayerDiv.classList.add("choose-player");
+	choosePlayerDiv.id = "choose-player";
 	choosePlayerRed.classList.add("coord");
 	choosePlayerRed.classList.add("red");
 	choosePlayerYellow.classList.add("coord");
@@ -51,7 +52,7 @@ function addChoosePlayer() {
 	choosePlayerDiv.append(choosePlayerYellow);
 }
 
-// Call The Function
+// Call The Function To Add The Option To Choose The First Player
 addChoosePlayer();
 
 // Start Game Button And Reset Game
@@ -68,7 +69,7 @@ function createGame() {
 	// Check To Make Sure Game Hasn't Started Yet
 	if (!gameBoard.classList.contains("started")) {
 		// Check If There Is The Option To Choose A Player
-		const choosePlayerDiv = document.querySelector("main .game  .container .game-board .choose-player");
+		const choosePlayerDiv = document.getElementById("choose-player");
 		if (choosePlayerDiv) {
 			choosePlayerDiv.remove();
 		}
@@ -81,7 +82,8 @@ function createGame() {
 		// Make A Player Turn Indicator
 		let playerTurnDiv = document.createElement("div");
 		playerTurnDiv.classList.add("player-turn");
-		playerTurnDiv.innerHTML = "It Is <span class='current-player'></span> Turn";
+		playerTurnDiv.id = "player-turn";
+		playerTurnDiv.innerHTML = "It Is <span class='current-player' id='current-player'></span> Turn";
 		gameContainer.prepend(playerTurnDiv);
 		// Create Game Tiles
 		for (let r = 0; r < rows; r++) {
@@ -95,7 +97,7 @@ function createGame() {
 				gameBoard.appendChild(tile);
 			}
 		}
-		// Select The Player To Play First (A function to be added in the future)
+		// Select The Player To Play First
 		currentPlayer == redPlayer ? switchPlayer("Red Player", "red") : switchPlayer("Yellow Player", "yellow");
 	}
 }
@@ -162,12 +164,12 @@ function addCoord() {
 		if (tile.classList.contains("used")) {
 			tilesUsed++;
 		}
-		// If All Tiles Used End Game As Tie
+		// If All Tiles Are Used End Game As Tie
 		if (tilesUsed == 42) {
 			gameOver("tie");
 		}
 	});
-	// Play Audio At The End
+	// Play Audio
 	audio.play();
 }
 
@@ -204,7 +206,7 @@ function placeCoord(coord, tileId) {
 
 function switchPlayer(player, color) {
 	// Get The Span Indicator In The Function To make Sure Game Has Started
-	const currentPlayerSpan = document.querySelector("main .game .container .current-player");
+	const currentPlayerSpan = document.getElementById("current-player");
 	// update Value
 	currentPlayerSpan.textContent = player;
 	currentPlayerSpan.classList.remove("red");
@@ -213,7 +215,7 @@ function switchPlayer(player, color) {
 }
 
 function checkWinner(tileId, player) {
-	// Store Row And Column Values
+	// Store Row And Column Values Of Current Coord
 	let rowNumber = tileId.charAt(0);
 	let columnNumber = tileId.charAt(2);
 	// Check horizontally
@@ -233,6 +235,7 @@ function checkWinner(tileId, player) {
 	) {
 		// End Game And Declare A winner If True
 		gameOver();
+		return;
 	}
 	// Check vertically
 	if (
@@ -251,6 +254,7 @@ function checkWinner(tileId, player) {
 	) {
 		// End Game And Declare A winner If True
 		gameOver();
+		return;
 	}
 
 	// Check diagonally
@@ -282,6 +286,7 @@ function checkWinner(tileId, player) {
 	) {
 		// End Game And Declare A winner If True
 		gameOver();
+		return;
 	}
 }
 
@@ -311,9 +316,9 @@ function gameOver(state) {
 	// Check The state Of The Game
 	if (currentPlayer == redPlayer && !state) {
 		// The Player Is Always Opposite To The Winner Since The Player Changes Before Checking The Winner
-		winnerTextP.textContent = "The Winner Is YELLOW Player";
+		winnerTextP.textContent = "The Winner Is The YELLOW Player";
 	} else if (currentPlayer == yellowPlayer && !state) {
-		winnerTextP.textContent = "The Winner Is RED Player";
+		winnerTextP.textContent = "The Winner Is The RED Player";
 		// Check If It Is A Tie Or Not
 	} else if (state == "tie") {
 		winnerTextP.textContent = "It Is A Draw";
@@ -341,7 +346,7 @@ function gameOver(state) {
 	placeholder.style.display = "block";
 	// Change The State Of The game
 	gameBoard.classList.remove("started");
-	// Make The Pointer Of Start Game Button Pointer
+	// Make The Cursor Of Start Game Button Pointer
 	startButton.style.cursor = "pointer";
 	// Get All Tiles
 	const tiles = document.querySelectorAll("main .container .game-board .tile");
@@ -351,7 +356,7 @@ function gameOver(state) {
 		tile.remove();
 	});
 	// Remove Current Player Indicator
-	document.querySelector("main .game .container .player-turn").remove();
+	document.getElementById("player-turn").remove();
 	// Reset Player Turn
 	currentPlayer = firstToPlay;
 	// Clear Both Players Arrays
